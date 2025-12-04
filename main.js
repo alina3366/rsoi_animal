@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('login-password').value;
             
             if (!email || !password) {
-                showNotification('❌ Введите email и пароль', 'error');
+                showNotification('Введите email и пароль', 'error');
                 return;
             }
             
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 await loadUserData();
                 
                 loginSection.classList.add('hidden');
-                showNotification('✅ Вход выполнен успешно!', 'success');
+                showNotification('Вход выполнен успешно!', 'success');
                 loginForm.reset();
                 
                 // Обновляем интерфейс
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } catch (error) {
                 console.error('Ошибка входа:', error);
-                showNotification('❌ Ошибка входа', 'error');
+                showNotification('Ошибка входа', 'error');
             }
         });
     }
@@ -364,12 +364,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Валидация
             if (!fullName || !email || !password) {
-                showNotification('❌ Заполните обязательные поля', 'error');
+                showNotification('Заполните обязательные поля', 'error');
                 return;
             }
             
             if (password !== confirmPassword) {
-                showNotification('❌ Пароли не совпадают', 'error');
+                showNotification('Пароли не совпадают', 'error');
                 return;
             }
             
@@ -391,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 await loadUserData();
                 
                 registerSection.classList.add('hidden');
-                showNotification('✅ Регистрация успешна!', 'success');
+                showNotification('Регистрация успешна!', 'success');
                 registerUserForm.reset();
                 
                 // Обновляем интерфейс
@@ -400,7 +400,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } catch (error) {
                 console.error('Ошибка регистрации:', error);
-                showNotification('❌ Ошибка регистрации', 'error');
+                showNotification('Ошибка регистрации', 'error');
             }
         });
     }
@@ -421,12 +421,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const experience = document.getElementById('volunteer-exp').value;
             
             if (!fullName || !email || !password) {
-                showNotification('❌ Заполните обязательные поля', 'error');
+                showNotification('Заполните обязательные поля', 'error');
                 return;
             }
             
             if (password !== confirmPassword) {
-                showNotification('❌ Пароли не совпадают', 'error');
+                showNotification('Пароли не совпадают', 'error');
                 return;
             }
             
@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 await loadUserData();
                 
                 registerSection.classList.add('hidden');
-                showNotification('✅ Регистрация волонтера успешна!', 'success');
+                showNotification('Регистрация волонтера успешна!', 'success');
                 registerVolunteerForm.reset();
                 
                 // Обновляем интерфейс
@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } catch (error) {
                 console.error('Ошибка регистрации волонтера:', error);
-                showNotification('❌ Ошибка регистрации', 'error');
+                showNotification('Ошибка регистрации', 'error');
             }
         });
     }
@@ -470,7 +470,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             if (!currentUser || currentUser.role_id !== 2) {
-                showNotification('❌ Только волонтеры могут добавлять животных', 'error');
+                showNotification('Только волонтеры могут добавлять животных', 'error');
                 return;
             }
             
@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             
             if (!animalData.name || !animalData.type || !animalData.location_city) {
-                showNotification('❌ Заполните обязательные поля (имя, вид, город)', 'error');
+                showNotification('Заполните обязательные поля (имя, вид, город)', 'error');
                 return;
             }
             
@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 savedAnimals.push(testAnimal);
                 localStorage.setItem('test_animals', JSON.stringify(savedAnimals));
                 
-                showNotification('✅ Животное успешно добавлено!', 'success');
+                showNotification('Животное успешно добавлено!', 'success');
                 addAnimalForm.reset();
                 showSection('animals');
                 await loadAnimals();
@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } catch (error) {
                 console.error('Ошибка добавления животного:', error);
-                showNotification('❌ Ошибка добавления животного', 'error');
+                showNotification('Ошибка добавления животного', 'error');
             }
         });
     }
@@ -578,14 +578,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (animals.length > 0) {
                 displayAnimals(animals);
             } else {
-                animalsList.innerHTML = '<div class="no-data">😿 Животные не найдены по выбранным фильтрам</div>';
+                animalsList.innerHTML = '<div class="no-data">Животные не найдены по выбранным фильтрам</div>';
             }
             
         } catch (error) {
             console.error('Ошибка загрузки животных:', error);
             animalsList.innerHTML = `
                 <div class="error">
-                    <h3>❌ Ошибка загрузки</h3>
+                    <h3>Ошибка загрузки</h3>
                     <p>${error.message}</p>
                     <button onclick="location.reload()" class="btn btn-primary">Обновить страницу</button>
                 </div>
@@ -817,13 +817,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log('Подача заявки на животное ID:', animalId);
                 
                 if (!currentUser) {
-                    showNotification('❌ Для подачи заявки необходимо войти в систему', 'error');
+                    showNotification('Для подачи заявки необходимо войти в систему', 'error');
                     showLoginModal();
                     return;
                 }
                 
                 if (currentUser.role_id === 2) {
-                    showNotification('❌ Волонтеры не могут подавать заявки на пристройство', 'error');
+                    showNotification('Волонтеры не могут подавать заявки на пристройство', 'error');
                     return;
                 }
                 
@@ -839,7 +839,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else if (favoriteBtn && !currentUser) {
             favoriteBtn.addEventListener('click', function() {
-                showNotification('❌ Для добавления в избранное необходимо войти в систему', 'error');
+                showNotification('Для добавления в избранное необходимо войти в систему', 'error');
                 showLoginModal();
             });
         }
@@ -849,7 +849,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     async function handleFavoriteClick(button, animalId) {
         if (!currentUser) {
-            showNotification('❌ Для добавления в избранное необходимо войти в систему', 'error');
+            showNotification('Для добавления в избранное необходимо войти в систему', 'error');
             showLoginModal();
             return;
         }
@@ -864,7 +864,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon.classList.remove('fas');
                 icon.classList.add('far');
                 button.classList.remove('active');
-                showNotification('💔 Убрано из избранного', 'info');
+                showNotification('Убрано из избранного', 'info');
                 
                 const animalIndex = animalsData.findIndex(a => a.animal_id === animalId);
                 if (animalIndex !== -1) {
@@ -877,7 +877,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 icon.classList.remove('far');
                 icon.classList.add('fas');
                 button.classList.add('active');
-                showNotification('❤️ Добавлено в избранное!', 'success');
+                showNotification('Добавлено в избранное!', 'success');
                 
                 const animalIndex = animalsData.findIndex(a => a.animal_id === animalId);
                 if (animalIndex !== -1) {
@@ -893,7 +893,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
         } catch (error) {
             console.error('Ошибка обновления избранного:', error);
-            showNotification('❌ Ошибка обновления избранного', 'error');
+            showNotification('Ошибка обновления избранного', 'error');
         }
     }
     
@@ -1019,13 +1019,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (adoptBtn) {
             adoptBtn.addEventListener('click', () => {
                 if (!currentUser) {
-                    showNotification('❌ Для подачи заявки необходимо войти в систему', 'error');
+                    showNotification('Для подачи заявки необходимо войти в систему', 'error');
                     showLoginModal();
                     return;
                 }
                 
                 if (currentUser.role_id === 2) {
-                    showNotification('❌ Волонтеры не могут подавать заявки на пристройство', 'error');
+                    showNotification('Волонтеры не могут подавать заявки на пристройство', 'error');
                     return;
                 }
                 
@@ -1047,7 +1047,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else if (favoriteDetailBtn && !currentUser) {
             favoriteDetailBtn.addEventListener('click', () => {
-                showNotification('❌ Для добавления в избранное необходимо войти в систему', 'error');
+                showNotification('Для добавления в избранное необходимо войти в систему', 'error');
                 showLoginModal();
             });
         }
@@ -1058,7 +1058,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function showApplicationForm(animalId) {
         const animal = animalsData.find(a => a.animal_id === animalId);
         if (!animal) {
-            showNotification('❌ Животное не найдено', 'error');
+            showNotification('Животное не найдено', 'error');
             return;
         }
         
@@ -1146,7 +1146,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Удаляем модальное окно
                 document.body.removeChild(modalContainer);
                 
-                showNotification('✅ Заявка успешно отправлена!', 'success');
+                showNotification('Заявка успешно отправлена!', 'success');
                 updateUserMenu();
                 
                 // Перезагружаем животных для обновления счетчиков
@@ -1154,7 +1154,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } catch (error) {
                 console.error('Ошибка отправки заявки:', error);
-                showNotification('❌ Ошибка отправки заявки', 'error');
+                showNotification('Ошибка отправки заявки', 'error');
             }
         });
         
@@ -1265,13 +1265,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     async function showFavorites() {
         if (!currentUser) {
-            showNotification('❌ Для просмотра избранного необходимо войти в систему', 'error');
+            showNotification('Для просмотра избранного необходимо войти в систему', 'error');
             showLoginModal();
             return;
         }
         
         if (userFavorites.length === 0) {
-            animalsList.innerHTML = '<div class="no-data">❤️ У вас пока нет избранных животных</div>';
+            animalsList.innerHTML = '<div class="no-data">У вас пока нет избранных животных</div>';
             showSection('animals');
             return;
         }
@@ -1288,23 +1288,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 showSection('animals');
                 document.getElementById('animals-link').classList.add('active');
             } else {
-                animalsList.innerHTML = '<div class="no-data">❤️ У вас пока нет избранных животных</div>';
+                animalsList.innerHTML = '<div class="no-data">У вас пока нет избранных животных</div>';
             }
         } catch (error) {
             console.error('Ошибка загрузки избранных:', error);
-            animalsList.innerHTML = '<div class="error">❌ Ошибка загрузки избранных животных</div>';
+            animalsList.innerHTML = '<div class="error">Ошибка загрузки избранных животных</div>';
         }
     }
     
     async function showUserApplications() {
         if (!currentUser) {
-            showNotification('❌ Для просмотра заявок необходимо войти в систему', 'error');
+            showNotification('Для просмотра заявок необходимо войти в систему', 'error');
             showLoginModal();
             return;
         }
         
         if (userApplications.length === 0) {
-            animalsList.innerHTML = '<div class="no-data">📄 У вас пока нет заявок на пристройство</div>';
+            animalsList.innerHTML = '<div class="no-data"> У вас пока нет заявок на пристройство</div>';
             showSection('animals');
             return;
         }
@@ -1362,7 +1362,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             showSection('animals');
         } else {
-            animalsList.innerHTML = '<div class="no-data">📄 У вас пока нет заявок на пристройство</div>';
+            animalsList.innerHTML = '<div class="no-data"> У вас пока нет заявок на пристройство</div>';
         }
     }
     
@@ -1378,7 +1378,7 @@ document.addEventListener('DOMContentLoaded', function() {
         checkAuth();
         updateNavigation();
         showSection('home');
-        showNotification('✅ Вы вышли из системы', 'success');
+        showNotification('Вы вышли из системы', 'success');
     }
     
     function showNotification(message, type = 'info') {
