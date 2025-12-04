@@ -20,13 +20,16 @@
                 <a href="#" id="add-animal-link" class="hidden">Добавить животное</a>
                 <a href="#" id="requests-link" class="hidden">Мои заявки</a>
                 <a href="#" id="favorites-link" class="hidden">Избранное</a>
+                <a href="#" id="admin-link" class="hidden">Админ</a>
             </div>
             <div class="auth-buttons">
                 <button id="login-btn" class="btn btn-outline">Войти</button>
                 <button id="register-btn" class="btn btn-primary">Регистрация</button>
                 <div id="user-menu" class="hidden">
-                    <span id="user-name"></span>
-                    <div id="user-menu-stats"></div>
+                    <div class="user-info">
+                        <span id="user-name"></span>
+                        <div id="user-menu-stats"></div>
+                    </div>
                     <button id="logout-btn" class="btn btn-outline">Выйти</button>
                 </div>
             </div>
@@ -34,6 +37,7 @@
     </header>
 
     <main>
+        <!-- Главная страница -->
         <section id="home-section" class="section active">
             <div class="hero">
                 <h1>Помогите найти дом бездомным животным</h1>
@@ -59,7 +63,8 @@
             </div>
         </section>
 
-        <section id="animals-section" class="section">
+        <!-- Список животных -->
+        <section id="animals-section" class="section hidden">
             <h2>Животные, ищущие дом</h2>
             <div class="filters">
                 <select id="type-filter">
@@ -87,6 +92,7 @@
             </div>
         </section>
 
+        <!-- Добавление животного -->
         <section id="add-animal-section" class="section hidden">
             <h2>Добавить животное</h2>
             <form id="add-animal-form">
@@ -134,8 +140,14 @@
             </form>
         </section>
 
+        <!-- Детали животного -->
         <section id="animal-details-section" class="section hidden">
             <!-- Детали животного будут загружены динамически -->
+        </section>
+
+        <!-- Панель администратора -->
+        <section id="admin-section" class="section hidden">
+            <!-- Панель администратора будет загружена динамически -->
         </section>
 
         <!-- Модальное окно входа -->
@@ -255,4 +267,5 @@
 
     <script src="js/main.js"></script>
 </body>
+</html>
 </html>
