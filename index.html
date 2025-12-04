@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пристройство бездомных животных</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-paw"></i>
+                <span>Дом для друга</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" id="home-link">Главная</a>
+                <a href="#" id="animals-link">Животные</a>
+                <a href="#" id="add-animal-link" class="hidden">Добавить животное</a>
+                <a href="#" id="requests-link" class="hidden">Мои заявки</a>
+                <a href="#" id="favorites-link" class="hidden">Избранное</a>
+            </div>
+            <div class="auth-buttons">
+                <button id="login-btn" class="btn btn-outline">Войти</button>
+                <button id="register-btn" class="btn btn-primary">Регистрация</button>
+                <div id="user-menu" class="hidden">
+                    <span id="user-name"></span>
+                    <div id="user-menu-stats"></div>
+                    <button id="logout-btn" class="btn btn-outline">Выйти</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home-section" class="section active">
+            <div class="hero">
+                <h1>Помогите найти дом бездомным животным</h1>
+                <p>Наша платформа объединяет волонтеров, приюты и людей, готовых подарить дом животному</p>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <i class="fas fa-dog"></i>
+                    <h3 id="animals-count">0</h3>
+                    <p>Животных ищут дом</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-home"></i>
+                    <h3 id="adoptions-count">0</h3>
+                    <p>Успешных пристроек</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3 id="volunteers-count">0</h3>
+                    <p>Активных волонтеров</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="animals-section" class="section">
+            <h2>Животные, ищущие дом</h2>
+            <div class="filters">
+                <select id="type-filter">
+                    <option value="">Все виды</option>
+                    <option value="cat">Кошки</option>
+                    <option value="dog">Собаки</option>
+                </select>
+                <select id="gender-filter">
+                    <option value="">Любой пол</option>
+                    <option value="male">Мужской</option>
+                    <option value="female">Женский</option>
+                </select>
+                <input type="text" id="city-filter" placeholder="Город">
+                <select id="status-filter">
+                    <option value="">Все статусы</option>
+                    <option value="searching">Ищет дом</option>
+                    <option value="reserved">Забронирован</option>
+                    <option value="adopted">Пристроен</option>
+                </select>
+                <button id="apply-filters" class="btn btn-primary">Применить</button>
+                <button id="reset-filters" class="btn btn-outline">Сбросить</button>
+            </div>
+            <div id="animals-list" class="animals-grid">
+                <!-- Животные будут загружены динамически -->
+            </div>
+        </section>
+
+        <section id="add-animal-section" class="section hidden">
+            <h2>Добавить животное</h2>
+            <form id="add-animal-form">
+                <div class="form-group">
+                    <label for="animal-name">Кличка *</label>
+                    <input type="text" id="animal-name" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="animal-type">Вид *</label>
+                        <select id="animal-type" required>
+                            <option value="">Выберите вид</option>
+                            <option value="cat">Кошка</option>
+                            <option value="dog">Собака</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="animal-breed">Порода</label>
+                        <input type="text" id="animal-breed">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="animal-age">Возраст (месяцев)</label>
+                        <input type="number" id="animal-age" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="animal-gender">Пол</label>
+                        <select id="animal-gender">
+                            <option value="">Не указан</option>
+                            <option value="male">Мужской</option>
+                            <option value="female">Женский</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="animal-location">Город *</label>
+                    <input type="text" id="animal-location" required>
+                </div>
+                <div class="form-group">
+                    <label for="animal-description">Описание *</label>
+                    <textarea id="animal-description" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить животное</button>
+            </form>
+        </section>
+
+        <section id="animal-details-section" class="section hidden">
+            <!-- Детали животного будут загружены динамически -->
+        </section>
+
+        <!-- Модальное окно входа -->
+        <section id="login-section" class="modal hidden">
+            <div class="modal-content">
+                <h2>Вход в систему</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Войти</button>
+                    <button type="button" id="close-login" class="btn btn-outline">Отмена</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Модальное окно выбора типа регистрации -->
+        <section id="register-type-section" class="modal hidden">
+            <div class="modal-content">
+                <h2>Выберите тип регистрации</h2>
+                <div class="register-type-options">
+                    <div class="register-type-card">
+                        <h3><i class="fas fa-user"></i> Обычный пользователь</h3>
+                        <p>Просматривайте животных, подавайте заявки на пристройство, добавляйте в избранное</p>
+                        <button id="register-as-user" class="btn btn-primary">Зарегистрироваться</button>
+                    </div>
+                    <div class="register-type-card">
+                        <h3><i class="fas fa-hands-helping"></i> Волонтер</h3>
+                        <p>Добавляйте животных, управляйте заявками, общайтесь с пользователями</p>
+                        <button id="register-as-volunteer" class="btn btn-primary">Зарегистрироваться волонтером</button>
+                    </div>
+                </div>
+                <button type="button" id="close-register-type" class="btn btn-outline">Отмена</button>
+            </div>
+        </section>
+
+        <!-- Модальное окно регистрации -->
+        <section id="register-section" class="modal hidden">
+            <div class="modal-content">
+                <h2>Регистрация</h2>
+                
+                <!-- Форма регистрации пользователя -->
+                <form id="register-user-form" class="hidden">
+                    <div class="form-group">
+                        <label for="user-fullname">Полное имя *</label>
+                        <input type="text" id="user-fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">Email *</label>
+                        <input type="email" id="user-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-password">Пароль *</label>
+                        <input type="password" id="user-password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-confirm-password">Подтвердите пароль *</label>
+                        <input type="password" id="user-confirm-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-phone">Телефон</label>
+                        <input type="tel" id="user-phone" placeholder="+375">
+                    </div>
+                    <div class="form-group">
+                        <label for="user-city">Город</label>
+                        <input type="text" id="user-city">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+                    <button type="button" id="close-register" class="btn btn-outline">Отмена</button>
+                </form>
+
+                <!-- Форма регистрации волонтера -->
+                <form id="register-volunteer-form" class="hidden">
+                    <div class="form-group">
+                        <label for="volunteer-fullname">Полное имя *</label>
+                        <input type="text" id="volunteer-fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-email">Email *</label>
+                        <input type="email" id="volunteer-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-password">Пароль *</label>
+                        <input type="password" id="volunteer-password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-confirm-password">Подтвердите пароль *</label>
+                        <input type="password" id="volunteer-confirm-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-phone">Телефон *</label>
+                        <input type="tel" id="volunteer-phone" placeholder="+375" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-city">Город *</label>
+                        <input type="text" id="volunteer-city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-org">Организация/Приют</label>
+                        <input type="text" id="volunteer-org">
+                    </div>
+                    <div class="form-group">
+                        <label for="volunteer-exp">Опыт работы с животными</label>
+                        <textarea id="volunteer-exp" rows="3" placeholder="Расскажите о вашем опыте..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Зарегистрироваться волонтером</button>
+                    <button type="button" id="close-register" class="btn btn-outline">Отмена</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
